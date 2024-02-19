@@ -1,7 +1,7 @@
 # .gitignore for Django Projects
 
 # Ignore virtual environment
-venv/
+env/
 
 # Ignore local development settings
 *.pyc
