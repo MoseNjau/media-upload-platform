@@ -7,7 +7,7 @@ from .models import UserProfile
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['image', 'date_of_birth', 'gender', 'phone_number']
+        fields = ['date_of_birth', 'gender', 'phone_number']
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField()
