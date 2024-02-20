@@ -1,4 +1,5 @@
 # .gitignore for Django Projects
+requirements.txt
 
 # Ignore virtual environment
 env/
@@ -16,7 +17,7 @@ __pycache__/
 *.env.prod
 
 # Ignore media files
-media/
+medias/
 
 # Ignore database migrations
 **/migrations/

@@ -1,19 +1,17 @@
-# core/forms.py
 from django import forms
-from .models import Post, Comment, Contact
+from .models import Contact
 
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ['title', 'content']
+class UploadPhotoForm(forms.Form):
+    image = forms.ImageField(label='Select a profile picture')
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['text']
+class EditVideoInfoForm(forms.Form):
+    title = forms.CharField(max_length=255)
+    description = forms.CharField(widget=forms.Textarea)
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['name', 'email', 'message']
-
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 5}),
+        }

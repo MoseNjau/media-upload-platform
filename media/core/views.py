@@ -1,83 +1,79 @@
-# core/views.py
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Post, Comment
-from .forms import PostForm, CommentForm, ContactForm
+from django.shortcuts import render 
+from django.views.generic.list import ListView
+from mediaApp.models import Video
+from django.contrib.auth.models import User
+from django.views import View
+from django.db.models import Q
+from media import settings
+from django.shortcuts import HttpResponse, redirect
+from .forms import UploadPhotoForm, EditVideoInfoForm
 
-def home_view(request):
-    # Additional context for the home page
-    media_info = {
-        'organization_name': 'Your Media Organization',
-        'contributors': [
-            {'name': 'Contributor 1', 'image_url': 'path_to_image_1.jpg'},
-            {'name': 'Contributor 2', 'image_url': 'path_to_image_2.jpg'},
-        ],
-    }
-
-    # You can include other data or queries for the home page here
-    # For example, fetching featured posts, latest news, etc.
-
-    return render(request, 'core/home.html', {'media_info': media_info})
+from django.views.generic.edit import FormView
+from .forms import ContactForm
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.utils import timezone
+from .models import Contact
 
 
-def post_list_view(request):
-    posts = Post.objects.all()
-    
-    # Additional context for the home page
-    media_info = {
-        'organization_name': 'Your Media Organization',
-        'contributors': [
-            {'name': 'Contributor 1', 'image_url': 'path_to_image_1.jpg'},
-            {'name': 'Contributor 2', 'image_url': 'path_to_image_2.jpg'},
-        ],
-    }
-    
-    return render(request, 'core/post_list.html', {'posts': posts, 'media_info': media_info})
+class ProfileView(ListView):
+    template_name = 'user/profile.html'
+    paginate_by = 3
+    context_object_name = 'data'
+    model = Video
 
-def post_detail_view(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    comments = Comment.objects.filter(post=post)
-    return render(request, 'core/post_detail.html', {'post': post, 'comments': comments})
+    def get_queryset(self):
+        user_id = self.kwargs['userid']
+        user = User.objects.get(pk=user_id)
+        videos = Video.objects.filter(Q(author=user))
+        return videos
 
-@login_required
-def create_post_view(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('core:post_list')
-    else:
-        form = PostForm()
+    def get_context_data(self, *, object_list=None, **kwargs):
+        user_id = self.kwargs['userid']
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        user = User.objects.get(id=user_id)
+        context['photoform'] = UploadPhotoForm
+        context['editform'] = EditVideoInfoForm
+        context['name'] = user.username
+        context['profile'] = user.profile
+        return context
 
-    return render(request, 'core/create_post.html', {'form': form})
+    def post(self, request, userid, *args):
+        image = request.FILES['image']
+        user = User.objects.get(pk=userid)
+        user.profile.pfp = image
+        user.save()
+        return redirect(f'/user/profile/{userid}')
 
-@login_required
-def create_comment_view(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
 
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = request.user
-            comment.post = post
-            comment.save()
-            return redirect('core:post_detail', post_id=post_id)
-    else:
-        form = CommentForm()
+class PfpView(View):
 
-    return render(request, 'core/create_comment.html', {'form': form, 'post': post})
+    def get(self, request, pfpname):
+        with open(settings.MEDIA_ROOT + 'pfps/' + pfpname, 'rb') as pfp:
+            return HttpResponse(content=pfp, content_type='image/jpeg*')
 
-def contact_view(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            contact = form.save()
-            # You can add additional logic here, like sending emails, etc.
-            return render(request, 'core/contact_success.html')
-    else:
-        form = ContactForm()
 
-    return render(request, 'core/contact.html', {'form': form})
+class ContactView(FormView):
+    template_name = 'contact/contact_form.html'  # Create an HTML template for your contact form
+    form_class = ContactForm
+
+    def form_valid(self, form):
+        # If the form is valid, save the contact information to the database
+        name = form.cleaned_data['name']
+        email = form.cleaned_data['email']
+        message = form.cleaned_data['message']
+
+        # Save the contact information to the database
+        Contact.objects.create(name=name, email=email, message=message, timestamp=timezone.now())
+
+        # Redirect to a success page (you can customize this URL)
+        return HttpResponseRedirect(reverse('contact:success'))
+
+    def form_invalid(self, form):
+        # If the form is invalid, render the form again with error messages
+        return self.render_to_response(self.get_context_data(form=form))
+
+# Create a success view (you can customize the HTML template)
+class ContactSuccessView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'contact/success.html')  # Create an HTML template for your success page
