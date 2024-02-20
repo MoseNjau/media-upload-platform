@@ -9,3 +9,5 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name='contact'),
     path('contact/success/', ContactSuccessView.as_view(), name='success'),
 ]
+
+

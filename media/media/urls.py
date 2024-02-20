@@ -24,3 +24,18 @@ urlpatterns = [
     path('auth/', include('authentication.urls'))
 ]
 
+from django.contrib import admin
+from django.urls import path, include
+from django.contrib.auth.views import LogoutView
+from django.views.generic import RedirectView
+from authentication.views import MyLoginView, MySignupView
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(url='mediaApp/')),
+    path('mediaApp/', include('mediaApp.urls')),  
+    path('user/', include('core.urls')),
+    path('login/', MyLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('signup/', MySignupView.as_view(), name='signup'),
+]

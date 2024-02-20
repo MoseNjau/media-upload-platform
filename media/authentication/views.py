@@ -1,54 +1,31 @@
-# authentication/views.py
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserProfileForm, UserRegistrationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from .forms import UserProfileForm
 from django.contrib import messages
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                # Add any additional logic after login if needed
-                return redirect('home')  # Replace 'home' with your desired redirect URL
-            else:
-                messages.error(request, 'Invalid username or password.')
-    else:
-        form = AuthenticationForm()
-    
-    return render(request, 'authentication/login.html', {'form': form})
+class MySignupView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'authentication/register.html'
 
-def register_view(request):
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        profile_form = UserProfileForm(request.POST, request.FILES)
-        
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        user_profile_form = UserProfileForm(self.request.POST, instance=self.object)
 
-            # Add any additional logic after registration if needed
-            messages.success(request, 'Account created successfully. Please log in.')
-            return redirect('login')  # Replace 'login' with your login URL
-    else:
-        user_form = UserRegistrationForm()
-        profile_form = UserProfileForm()
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+            messages.success(self.request, 'Account created successfully. Please log in.')
 
-    return render(request, 'authentication/register.html', {'user_form': user_form, 'profile_form': profile_form})
+        return response
 
-def logout_view(request):
-    logout(request)
-    # Add any additional logic after logout if needed
-    return redirect('home')  # Replace 'home' with your desired redirect URL
 
-# Additional view for account verification (assuming email verification)
-# This could involve sending a verification email to the user's email address
-# and updating the UserProfile to mark the account as verified upon confirmation.
-# The implementation would depend on your chosen method for email verification.
+class MyLoginView(LoginView):
+    redirect_authenticated_user = True
+    template_name = 'authentication/login.html'
+
+
+class MyLogoutView(LogoutView):
+    # You can add any additional logic after logout if needed
+    next_page = reverse_lazy('home')  # Replace 'home' with your desired redirect URL
