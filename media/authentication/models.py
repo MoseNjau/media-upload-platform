@@ -12,7 +12,6 @@ GENDER_CHOICES = [
 
 class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to='avatar/', null=True, blank=True)
     date_of_birth = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='O')
     phone_number = PhoneNumberField()

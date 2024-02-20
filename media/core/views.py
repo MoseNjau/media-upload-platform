@@ -17,7 +17,7 @@ from .models import Contact
 
 
 class ProfileView(ListView):
-    template_name = 'user/profile.html'
+    template_name = 'core/profile.html'
     paginate_by = 3
     context_object_name = 'data'
     model = Video
@@ -43,7 +43,7 @@ class ProfileView(ListView):
         user = User.objects.get(pk=userid)
         user.profile.pfp = image
         user.save()
-        return redirect(f'/user/profile/{userid}')
+        return redirect(f'/core/profile/{userid}')
 
 
 class PfpView(View):
