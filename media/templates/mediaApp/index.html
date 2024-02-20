@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <nav class="navbar navbar-light bg-light">
+
+        <div class="navbar-brand">
+            <a href="/tube/">
+                <h2>Media App</h2>
+            </a>
+        </div>
+        <span class="navbar-text">
+            {% if user.is_authenticated %}
+                Hello, <a href="/core/profile/{{ user.id }}">{{ user }}</a> - <a href="{% url 'logout' %}">logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}">Sign Up</a>
+            {% endif %}
+        </span>
+
+        <span class="navbar-text">
+            {% if tag %}
+                <a href="/mediaApp/?tag={{ tag }}">#{{ tag }}</a>
+            {% endif %}
+        </span>
+        <span class="navbar-text">
+            {{ videoqnt }} videos - <a href="{% url 'upload' %}">Upload video</a>
+        </span>
+
+        <form class="form-inline my-2 my-lg-0" action="{% url 'index' %}">
+            <input class="form-control mr-sm-2" type="search" aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+
+    <div class="mt-4">
+        <div class="container">
+            <div class="row infinite-container">
+                {% for video in page_obj %}
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 infinite-item">
+                    <a href="/mediaApp/watch/{{ video.id }}/">
+                        <div class="video-testimonial-block">
+                            <div class="video-thumbnail">
+                                <img src="/mediaApp/thumb/thumb{{ video.file.name }}/" alt="" class="img-fluid" >
+                            </div>
+                        </div>
+                    </a>
+                    <div class="video-testimonial-content">
+                        <h4 class="mb10">{{ video.title }}</h4>
+                        <small class="form-text text-muted">{{ video.views }} views</small>
+                        <p>
+                            <img src="/core/profile/{{ video.author.profile.pfp }}" alt="" class="pfp">
+                            <a href="/core/profile/{{ video.author.id }}">{{ video.author }}</a>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                {% if page_obj.has_next %}
+                <a class="infinite-more-link" href="?{% if query %}q={{ query }}{% elif tag %}tag={{ tag }}{% endif %}&page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>

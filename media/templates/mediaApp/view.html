@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <nav class="navbar navbar-light bg-light">
+        <div class="navbar-brand">
+            <a href="/mediaApp/">
+                <h2>media App</h2>
+            </a>
+        </div>
+        <span class="navbar-text">
+            {% if user.is_authenticated %}
+                Hello, <a href="/core/profile/{{ user.id }}">{{ user }}</a> - <a href="{% url 'logout' %}">logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}">Sign Up</a>
+            {% endif %}
+        </span>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'index' %}">
+            <input class="form-control mr-sm-2" type="search" aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+
+    <div class="container-md my-4">
+        <video width="640" height="400" controls>
+            <source src="/mediaApp/file/{{ video.file.name }}">
+        </video>
+
+        <p>{{ video.title }}</p>
+        <p>{{ video.views }}</p>
+        <p>{{ video.description }}</p>
+        
+        {% for tag in tags %}
+            <a target="_blank" href="/mediaApp/?tag={{ tag.name }}">#{{ tag.name }}</a>
+        {% endfor %}
+        <br>
+
+        {% if user.is_authenticated %}
+            {{ form.comment.errors }}
+            <form action="" method="post" class="form-signup"> {% csrf_token %}
+                <label for="{{ form.comment.id_for_label }}">Comment</label>
+                <input name="{{ form.comment.html_name }}" id="{{ form.comment.id_for_label }}" type="text" placeholder="Add a comment">
+                <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+            </form>
+        {% endif %}
+
+        <div class="container-md my-4">
+            {% for comment in comments %}
+                <div class="container">
+                    <p>{{ comment.text }}</p>
+                    <small>{{ comment.author }}</small>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+</body>

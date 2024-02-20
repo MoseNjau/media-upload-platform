@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="/mediaApp/">
+                <h2>Media App</h2>
+            </a>
+        </div>
+    </nav>
+
+    {% if user.is_authenticated %}
+        <div class="text-center">
+            <form enctype="multipart/form-data" method="post" action="" class="form-signup">
+                {% csrf_token %}
+                <h1 class="h3 mb-3 font-weight-normal">Upload</h1>
+
+                <!-- File form -->
+                {{ form.video.errors }}
+                <label for="{{ form.video.id_for_label }}" class="sr-only"></label>
+                <input class="form-control" id="{{ form.video.id_for_label }}"
+                    maxlength="255" name="{{ form.video.html_name }}" type="file" accept="video/mp4,video/x-m4v,video/*" />
+                <small class="form-text text-muted">{{ form.video.help_text|safe }}</small>
+
+                <!-- Title form -->
+                {{ form.title.errors }}
+                <label for="{{ form.title.id_for_label }}" class="sr-only"></label>
+                <input class="form-control" id="{{ form.title.id_for_label }}"
+                    maxlength="255" name="{{ form.title.html_name }}" placeholder="Title" type="text" />
+                <small class="form-text text-muted">{{ form.title.help_text|safe }}</small>
+
+                <!-- Tags form -->
+                {{ form.tags.errors }}
+                <label for="{{ form.tags.id_for_label }}" class="sr-only"></label>
+                <input class="form-control" id="{{ form.tags.id_for_label }}"
+                    maxlength="255" name="{{ form.tags.html_name }}" placeholder="Tags" type="text" />
+                <small class="form-text text-muted">{{ form.tags.help_text|safe }}</small>
+
+                <!-- Description form -->
+                {{ form.description.errors }}
+                <label for="{{ form.description.id_for_label }}" class="sr-only"></label>
+                <input class="form-control" id="{{ form.description.id_for_label }}"
+                    maxlength="1024" name="{{ form.description.html_name }}" placeholder="Description" type="text" />
+                <small class="form-text text-muted">{{ form.description.help_text|safe }}</small>
+
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Upload</button>
+            </form>
+        </div>
+    {% else %}
+        <div class="form-text">
+            <p>
+                You are not logged in. Please log in or sign up if you don't have an account yet.
+            </p>
+            <br>
+            <a href="{% url 'login' %}">Login</a>
+            <span> or </span>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        </div>
+    {% endif %}
+{% endblock %}
+</body>
