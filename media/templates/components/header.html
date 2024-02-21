@@ -1,18 +1,19 @@
 <!-- Include your site's navigation, logo, user authentication status, etc. -->
-<nav>
-    <ul>
+<nav class="navbar navbar-light bg-light">
+    <ul class="navbar-nav">
         {% if user.is_authenticated %}
-            <li><a href="{% url 'core:profile' userid=user.id %}">Home</a></li>
-            <li><a href="{% url 'authentication:logout' %}">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'core:profile' userid=user.id %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'authentication:logout' %}">Logout</a></li>
         {% else %}
-            <li><a href="{% url 'authentication:login' %}">Login</a></li>
-            <li><a href="{% url 'authentication:register' %}">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'authentication:login' %}">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'authentication:register' %}">Register</a></li>
         {% endif %}
         <!-- Add more navigation links as needed -->
     </ul>
 </nav>
 
 <!-- Add other header content like logo, user information, etc. -->
-<div>
+<div class="brand">
     <h1>Dream Forge Production</h1>
+    <!-- Add your logo or other content here -->
 </div>
