@@ -26,6 +26,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='mediaApp/')),
     path('mediaApp/', include('mediaApp.urls')),  
     path('user/', include('core.urls')),
+    path('auth/', include('authentication.urls')),
     path('login/', MyLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', MySignupView.as_view(), name='signup'),

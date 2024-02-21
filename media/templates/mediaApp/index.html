@@ -5,15 +5,15 @@
 
         <div class="navbar-brand">
             <a href="/mediaApp/">
-                <h2>Media App</h2>
+                <h2>Dream Forge Production</h2>
             </a>
         </div>
         <span class="navbar-text">
             {% if user.is_authenticated %}
-                Hello, <a href="/core/profile/{{ user.id }}">{{ user }}</a> - <a href="{% url 'logout' %}">logout</a>
+                Hello, <a href="/core/profile/{{ user.id }}">{{ user }}</a> - <a href="{% url 'authentication:logout' %}">logout</a>
             {% else %}
-                <a href="{% url 'login' %}">Login</a>
-                <a href="{% url 'signup' %}">Sign Up</a>
+                <a href="{% url 'authentication:login' %}">Login</a>
+                <a href="{% url 'authentication:signup' %}">Sign Up</a>
             {% endif %}
         </span>
 
@@ -23,10 +23,10 @@
             {% endif %}
         </span>
         <span class="navbar-text">
-            {{ videoqnt }} videos - <a href="{% url 'upload' %}">Upload video</a>
+            {{ videoqnt }} videos - <a href="{% url 'mediaApp:upload' %}">Upload video</a>
         </span>
 
-        <form class="form-inline my-2 my-lg-0" action="{% url 'index' %}">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'mediaApp:index' %}">
             <input class="form-control mr-sm-2" type="search" aria-label="Search" name="q">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
