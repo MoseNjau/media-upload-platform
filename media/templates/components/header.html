@@ -1,9 +1,13 @@
 <!-- Include your site's navigation, logo, user authentication status, etc. -->
 <nav>
     <ul>
-        <li><a href="{% url 'core:home' %}">Home</a></li>
-        <li><a href="{% url 'authentication:login' %}">Login</a></li>
-        <li><a href="{% url 'authentication:register' %}">Register</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'core:profile' userid=user.id %}">Home</a></li>
+            <li><a href="{% url 'authentication:logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'authentication:login' %}">Login</a></li>
+            <li><a href="{% url 'authentication:register' %}">Register</a></li>
+        {% endif %}
         <!-- Add more navigation links as needed -->
     </ul>
 </nav>
