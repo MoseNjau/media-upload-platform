@@ -8,6 +8,7 @@ from django.views.generic import CreateView, UpdateView
 from .forms import LoginForm, UserRegistrationForm
 from .models import UserProfile
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 
 class MyLoginView(CreateView):
     template_name = 'authentication/login.html'
@@ -20,7 +21,8 @@ class MyLoginView(CreateView):
         user = authenticate(self.request, username=username, password=password)
         if user:
             login(self.request, user)
-            return redirect('core/profile')  # Redirect to the profile page upon successful login
+            profile_url = reverse('core:profile', args=[user.id])
+            return redirect(profile_url)
         else:
             messages.error(self.request, 'Login failed. Please try again.')
             return super().form_invalid(form)
@@ -90,4 +92,4 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 class LogoutView(LoginRequiredMixin, CreateView):
     def get(self, request, *args, **kwargs):
         logout(request)
-        return redirect('home')  # Replace 'home' with your desired redirect URL
+        return redirect('authentication:login')
