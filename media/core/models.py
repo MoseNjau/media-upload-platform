@@ -14,7 +14,7 @@ class Profile(models.Model):
                               processors=[ResizeToFill(100, 100)],
                               format='JPEG',
                               options={'quality': 60},
-                              default='pfps/default_pfp.jpeg')
+                              default='pfile/default_pfp.jpeg')
 
 
 @receiver(post_save, sender=User)

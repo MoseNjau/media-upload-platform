@@ -49,7 +49,7 @@ class ProfileView(ListView):
 class PfpView(View):
 
     def get(self, request, pfpname):
-        with open(settings.MEDIA_ROOT + 'pfps/' + pfpname, 'rb') as pfp:
+        with open(settings.MEDIA_ROOT + 'pfile/' + pfpname, 'rb') as pfp:
             return HttpResponse(content=pfp, content_type='image/jpeg*')
 
 
