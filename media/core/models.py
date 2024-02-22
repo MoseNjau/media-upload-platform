@@ -9,7 +9,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user = models.OneToOneField('authentication.UserProfile', on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='profile')
     pfp = ProcessedImageField(upload_to='pfps/',
                               processors=[ResizeToFill(100, 100)],
                               format='JPEG',

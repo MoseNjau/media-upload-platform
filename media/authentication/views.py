@@ -20,9 +20,10 @@ class MyLoginView(CreateView):
         user = authenticate(self.request, username=username, password=password)
         if user:
             login(self.request, user)
-            return HttpResponse("success")
+            return redirect('profile')  # Redirect to the profile page upon successful login
         else:
-            return HttpResponse("Failed")
+            messages.error(self.request, 'Login failed. Please try again.')
+            return super().form_invalid(form)
 
     def get(self, request, *args, **kwargs):
         self.object = None
@@ -45,7 +46,9 @@ class MySignupView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, 'Account created successfully. Please log in.')
+        
+        # Display success message
+        messages.success(self.request, 'You have registered successfully. Please log in.')
 
         # Log in the user after successful registration
         user = authenticate(
@@ -69,7 +72,7 @@ class MySignupView(CreateView):
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
     form_class = UserRegistrationForm
-    template_name = 'profile.html'
+    template_name = 'authentication/profile.html'
     success_url = reverse_lazy('profile')
 
     def get_object(self, queryset=None):
