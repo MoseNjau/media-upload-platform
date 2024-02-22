@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'components/base.html' %}
 {% block content %}
     <div class="mt-2">
         <div class="container">
@@ -11,7 +11,8 @@
                                 <h4 class="modal-title">Upload Photo</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <form enctype="multipart/form-data" method="post" action="" class="form-signup">{% csrf_token %}
+                            <form enctype="multipart/form-data" method="post" action="" class="form-signup">
+                                {% csrf_token %}
                                 <div class="modal-body">
                                     <input id="{{ photoform.image.id_for_label }}"
                                        maxlength="255" name="{{ photoform.image.html_name }}"

@@ -20,7 +20,7 @@ class MyLoginView(CreateView):
         user = authenticate(self.request, username=username, password=password)
         if user:
             login(self.request, user)
-            return redirect('profile')  # Redirect to the profile page upon successful login
+            return redirect('core/profile')  # Redirect to the profile page upon successful login
         else:
             messages.error(self.request, 'Login failed. Please try again.')
             return super().form_invalid(form)
