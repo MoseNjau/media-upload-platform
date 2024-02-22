@@ -5,8 +5,10 @@ from django.views.generic import CreateView
 from .forms import UserProfileForm
 from django.contrib import messages
 
+from .forms import UserRegistrationForm
+
 class MySignupView(CreateView):
-    form_class = UserCreationForm
+    form_class = UserRegistrationForm  # Use your custom form
     success_url = reverse_lazy('login')
     template_name = 'authentication/register.html'
 
@@ -19,6 +21,7 @@ class MySignupView(CreateView):
             messages.success(self.request, 'Account created successfully. Please log in.')
 
         return response
+
 
 
 class MyLoginView(LoginView):
