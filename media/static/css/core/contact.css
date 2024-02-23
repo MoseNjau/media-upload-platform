@@ -1,0 +1,70 @@
+/* css/core/contact.css */
+
+/* Apply styles to the entire contact container */
+.contact-container {
+    margin: 20px;
+}
+
+/* Style the heading */
+#contact-heading {
+    color: #333;
+    font-size: 36px;
+}
+
+/* Style the introductory text */
+.intro-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Style the contact form */
+#contact-form {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+/* Style the submit button */
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Additional information section */
+.additional-info {
+    margin-top: 20px;
+}
+
+/* Style the heading in the additional information section */
+.info-heading {
+    color: #333;
+    font-size: 24px;
+}
+
+/* Style the text in the additional information section */
+.info-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Style the contact channels list */
+.contact-channels {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Style the links in the contact channels list */
+.contact-link, .social-link {
+    color: #007BFF;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/* Style the response time text */
+.response-time {
+    font-size: 14px;
+    margin-top: 10px;
+}

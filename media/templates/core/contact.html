@@ -1,15 +1,43 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/contact.css' %}">
+{% endblock %}
 {% block content %}
-  <h1>Contact Us</h1>
+  <div class="container contact-container">
+    <h1 id="contact-heading">Contact Us</h1>
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Send Message</button>
-  </form>
+    <p class="intro-text">
+      Have questions, suggestions, or just want to say hello? Feel free to reach out to us using the form below.
+    </p>
 
-  <!-- Add additional content or sections as needed -->
+    <form method="post" id="contact-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="submit-button">Send Message</button>
+    </form>
+
+    <div class="additional-info" id="additional-info-section">
+      <h2 class="info-heading">Additional Information</h2>
+
+      <p class="info-text">
+        You can also contact us through the following channels:
+      </p>
+
+      <ul class="contact-channels">
+        <li>Email: <a href="mailto:info@example.com" class="contact-link">info@example.com</a></li>
+        <li>Phone: +123 456 7890</li>
+        <li>Social Media:
+          <a href="https://twitter.com/example" target="_blank" rel="noopener noreferrer" class="social-link">Twitter</a>,
+          <a href="https://facebook.com/example" target="_blank" rel="noopener noreferrer" class="social-link">Facebook</a>,
+          <a href="https://linkedin.com/company/example" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+        </li>
+      </ul>
+
+      <p class="response-time">
+        We strive to respond to your messages within 24 hours.
+      </p>
+    </div>
+  </div>
 {% endblock %}
