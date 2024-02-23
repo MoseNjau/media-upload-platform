@@ -69,7 +69,6 @@ Technological Stack:
 Remember to adapt these requirements based on your specific needs and the scale of your project. Additionally, consider breaking down these requirements into user stories and tasks for easier implementation and project management.
 
 
-
 media/
 │
 ├── media/
@@ -112,11 +111,21 @@ media/
 │   ├── urls.py
 │   └── views.py
 │
-├── components/
-│   ├── __init__.py
-│   ├── base.html
-│   ├── footer.html
-│   └── header.html
+├── static/
+│   ├── js/
+│   ├── images/
+│   ├── css/
+│   │   ├── authentication/
+│   │   │   └── (authentication-related CSS files)
+│   │   ├── components/
+│   │   │   └── (common components-related CSS files)
+│   │   └── core/
+│   │       ├── profile.css
+│   │       └── contacts.css
+│   └── mediapp/
+│       ├── index.css
+│       ├── upload.css
+│       └── watch.css
 │
 └── templates/
     ├── authentication/

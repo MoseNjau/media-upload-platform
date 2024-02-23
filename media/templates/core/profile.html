@@ -1,4 +1,9 @@
 {% extends 'components/base.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/profile.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="mt-2">
         <div class="container">
