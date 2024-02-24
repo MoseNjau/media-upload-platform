@@ -22,6 +22,9 @@ class Video(models.Model):
     class Meta:
         ordering = ['upload_date']
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Comment(models.Model):
     text = models.CharField(max_length=255)
@@ -31,6 +34,9 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['post_date']
+
+    def __str__(self) -> str:
+        return self.text
 
 
 class VideoTag(models.Model):

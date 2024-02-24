@@ -22,6 +22,7 @@ class MyLoginView(CreateView):
         if user:
             login(self.request, user)
             profile_url = reverse('core:profile', args=[user.id])
+            print(profile_url)
             return redirect(profile_url)
         else:
             messages.error(self.request, 'Login failed. Please try again.')
@@ -40,6 +41,8 @@ class MyLoginView(CreateView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form_class()
         return context
+    
+    
 
 class MySignupView(CreateView):
     form_class = UserRegistrationForm
@@ -71,23 +74,23 @@ class MySignupView(CreateView):
         kwargs.pop('instance', None)  # Remove 'instance' from the kwargs
         return kwargs
     
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-    model = UserProfile
-    form_class = UserRegistrationForm
-    template_name = 'authentication/profile.html'
-    success_url = reverse_lazy('profile')
+# class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+#     model = UserProfile
+#     form_class = UserRegistrationForm
+#     template_name = 'authentication/profile.html'
+#     success_url = reverse_lazy('profile')
 
-    def get_object(self, queryset=None):
-        return self.request.user.userprofile
+#     def get_object(self, queryset=None):
+#         return self.request.user.userprofile
 
-    def form_valid(self, form):
-        user_profile = form.save(commit=False)
-        user_profile.date_of_birth = form.cleaned_data['date_of_birth']
-        user_profile.gender = form.cleaned_data['gender']
-        user_profile.phone_number = form.cleaned_data['phone_number']
-        user_profile.save()
-        messages.success(self.request, 'Profile updated successfully.')
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         user_profile = form.save(commit=False)
+#         user_profile.date_of_birth = form.cleaned_data['date_of_birth']
+#         user_profile.gender = form.cleaned_data['gender']
+#         user_profile.phone_number = form.cleaned_data['phone_number']
+#         user_profile.save()
+#         messages.success(self.request, 'Profile updated successfully.')
+#         return super().form_valid(form)
 
 class LogoutView(LoginRequiredMixin, CreateView):
     def get(self, request, *args, **kwargs):

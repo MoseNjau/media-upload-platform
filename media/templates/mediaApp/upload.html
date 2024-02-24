@@ -1,7 +1,11 @@
 {% extends 'components/base.html' %}
 
 {% load static %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mediaApp/upload.css' %}">
+{% endblock %}
 {% load crispy_forms_tags %}
+
 {% block content %}
     <nav class="navbar">
         <div class="navbar-brand">

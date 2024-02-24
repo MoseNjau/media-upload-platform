@@ -1,4 +1,45 @@
 {% extends 'components/base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static '\css\authentication\login.css' %}">
+    <style>
+        /* Embed your CSS styles here */
+        *{
+            text-decoration: none !important;
+        }
+        html, body{
+            height: 100%;
+        }
+        .text-center{
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+            -ms-flex-align: center;
+            -ms-flex-pack: center;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            height: 80%;
+        }
+        .form-signin{
+            max-width: 330px;
+        }
+        .form-signin input[id="id_username"]{
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-signin input[id="id_password"]{
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
 <body>

@@ -14,8 +14,10 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from .models import Contact
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
-
+@method_decorator(login_required, name='dispatch')
 class ProfileView(ListView):
     template_name = 'core/profile.html'
     paginate_by = 3

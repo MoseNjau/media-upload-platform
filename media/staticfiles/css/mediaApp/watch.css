@@ -1,0 +1,34 @@
+/* watch.css */
+
+/* Styles for the video player */
+video {
+    width: 100%;
+  }
+  
+  /* Styles for the video information and comments section */
+  .container {
+    margin-top: 2rem;
+  }
+  
+  .card {
+    border: 1px solid #e1e1e1;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  /* Styles for the related videos section */
+  .list-group {
+    margin-top: 2rem;
+  }
+  
+  .list-group-item {
+    cursor: pointer;
+    border: 1px solid #e1e1e1;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f8f9fa;
+  }
+  
