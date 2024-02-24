@@ -4,7 +4,7 @@
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/mediaApp/upload.css' %}">
 {% endblock %}
-{% load crispy_forms_tags %}
+
 
 {% block content %}
     <nav class="navbar">
@@ -19,7 +19,6 @@
         <div class="text-center">
             <form enctype="multipart/form-data" method="post" action="" class="form-signup">
                 {% csrf_token %}
-                {{ form|crispy }}
                 <h1 class="h3 mb-3 font-weight-normal">Upload</h1>
 
                 <!-- File form -->
