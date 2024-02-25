@@ -41,15 +41,16 @@
                 <h4>Related Videos</h4>
                 <div class="list-group">
                     {% for related_video in related_videos %}
-                        <a href="/mediaApp/watch/{{ related_video.id }}/" class="list-group-item list-group-item-action">
+                        <a href="{% url 'mediaApp/watch' video_id=related_video.id %}" class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ related_video.title }}</h5>
                                 <small>{{ related_video.views }} views</small>
                             </div>
-                            <img src="/mediaApp/thumb/thumb{{ related_video.file.name }}/" alt="{{ related_video.title }}" class="img-fluid">
+                            <img src="{% url 'generate_thumbnail' video_id=related_video.id %}" alt="{{ related_video.title }}" class="img-fluid">
                         </a>
                     {% endfor %}
                 </div>
+                
             </div>
         </div>
     </div>

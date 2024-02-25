@@ -41,10 +41,11 @@
             <div class="row infinite-container">
                 {% for video in page_obj %}
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 infinite-item">
-                    <a href="/mediaApp/watch/{{ video.id }}/">
+                    <!-- Updated: Make the video thumbnail clickable -->
+                    <a href="{% url 'mediaApp/watch' video_id=video.id %}">
                         <div class="video-testimonial-block">
                             <div class="video-thumbnail">
-                                <img src="/mediaApp/thumb/thumb{{ video.file.name }}/" alt="" class="img-fluid" >
+                                <img src="{% url 'generate_thumbnail' video_id=video.id %}" alt="" class="img-fluid">
                             </div>
                         </div>
                     </a>

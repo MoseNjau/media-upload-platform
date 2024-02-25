@@ -4,10 +4,11 @@ from django.core.exceptions import ValidationError
 from django.views.generic.list import ListView
 from django.db.models import Q
 from django.views import View
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .models import Video, VideoTag, Tag, Comment
 from .forms import MediaUploadForm, SearchMediaForm, CommentForm
 from media import settings
+from PIL import Image
 import mimetypes
 import re
 import os
@@ -41,6 +42,21 @@ class Index(ListView):
         context['videoqnt'] = Video.objects.all().count()
         return context
 
+
+class ThumbnailGeneratorView(View):
+    def get(self, request, video_id):
+        video = get_object_or_404(Video, pk=video_id)
+
+        # Open the original image using Pillow
+        original_image = Image.open(video.original_image.path)
+
+        # Generate a thumbnail (replace dimensions with your desired size)
+        thumbnail = original_image.resize((100, 100))
+
+        # Serve the thumbnail
+        response = HttpResponse(content_type="image/jpeg")
+        thumbnail.save(response, "JPEG")
+        return response
 
 class Upload(View):
 

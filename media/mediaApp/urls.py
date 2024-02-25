@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Index, Upload, Viewer, FileViewer, ThumbViewer, DeleteVideoView, EditVideoInfoView
+from .views import Index, Upload, Viewer, FileViewer, ThumbViewer, DeleteVideoView, EditVideoInfoView, ThumbnailGeneratorView
 
 app_name = 'mediaApp'
 
@@ -11,4 +11,5 @@ urlpatterns = [
     path('thumb/<str:file_name>/', ThumbViewer.as_view(), name='thumb'),
     path('delete/<int:video_id>/', DeleteVideoView.as_view(), name='delete'),
     path('edit/<int:video_id>/', EditVideoInfoView.as_view(), name='edit'),
+    path('generate_thumbnail/<int:video_id>/', ThumbnailGeneratorView.as_view(), name='generate_thumbnail'),
 ]

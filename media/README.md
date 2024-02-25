@@ -139,6 +139,21 @@ media/
         ├── footer.html
         └── header.html
 
+index.html:
+
+Ideal for displaying a list of videos and allowing users to click on a video thumbnail to watch it.
+Users can explore multiple videos from this page.
+Provides a seamless browsing experience.
+upload.html:
+
+Typically used for uploading new videos rather than watching existing ones.
+Users can navigate to this page to upload their own videos.
+Might not be the primary page for watching videos but could contain links to recently uploaded videos.
+view.html:
+
+Suitable for displaying a specific video with details.
+Users might land on this page after clicking on a video from another page.
+Shows detailed information about a specific video, including its title, description, comments, and tags.
 
 
 1. **`authentication` App:**
