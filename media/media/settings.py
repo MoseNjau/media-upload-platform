@@ -127,7 +127,8 @@ LOGOUT_REDIRECT_URL = '/login'
 LOGIN_REDIRECT_URL = 'mediaApp'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / "static/"
+    # os.path.join(BASE_DIR, 'static'),
 ]
 
 

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'components/base.html' %}
 {% load static %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/mediaApp/view.css' %}">
@@ -19,7 +19,7 @@
                 <a href="{% url 'signup' %}">Sign Up</a>
             {% endif %}
         </span>
-        <form class="form-inline my-2 my-lg-0" action="{% url 'index' %}">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'mediaApp:index' %}">
             {% csrf_token %}
             <input class="form-control mr-sm-2" type="search" aria-label="Search" name="q">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

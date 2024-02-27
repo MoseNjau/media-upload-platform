@@ -50,10 +50,10 @@
             <div class="row infinite-container">
                 {% for video in page_obj %}
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 infinite-item">
-                        <a href="/tube/watch/{{ video.id }}/">
+                        <a href="/mediaApp/watch/{{ video.id }}/">
                         <div class="video-testimonial-block">
                             <div class="video-thumbnail">
-                                    <img src="/tube/thumb/thumb{{ video.file.name }}/" alt="" class="img-fluid" >
+                                    <img src="/mediaApp/thumb/thumb{{ video.file.name }}/" alt="" class="img-fluid" >
                                 </div>
                             </div>
                         </a>
@@ -78,7 +78,7 @@
                                         <p>Are you sure?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="/tube/delete/{{ video.id }}/" method="post">{% csrf_token %}
+                                        <form action="/mediaApp/delete/{{ video.id }}/" method="post">{% csrf_token %}
                                             <input type="submit" name="delete" value="Delete" class="btn btn-danger">
                                         </form>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -93,7 +93,7 @@
                                         <h4 class="modal-title">Edit</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
-                                    <form action="/tube/edit/{{ video.id }}/" method="post">{% csrf_token %}
+                                    <form action="/mediaApp/edit/{{ video.id }}/" method="post">{% csrf_token %}
                                         <div class="modal-body">
                                             <input id="{{ editform.title.id_for_label }}"
                                                maxlength="255" name="{{ editform.title.html_name }}"
