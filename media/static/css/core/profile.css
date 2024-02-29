@@ -1,21 +1,122 @@
-*{
-    text-decoration: none !important;
+/* profile.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
 }
-.video-thumbnail{
-    max-width: 350px !important;
-    max-height: 197px !important;
+
+.navbar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+}
+
+.navbar h2 {
+    margin: 0;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.mt-2 {
+    margin-top: 20px;
+}
+
+.mt-4 {
+    margin-top: 40px;
+}
+
+.pfp {
+    max-width: 100px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.modal-content {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: #fff;
+    border-bottom: 1px solid #007bff;
+}
+
+.modal-footer {
+    border-top: 1px solid #007bff;
+}
+
+.video-thumbnail {
+    max-width: 350px;
+    max-height: 197px;
     text-align: center;
     background-color: lightgrey;
     overflow: hidden;
+    border-radius: 5px;
 }
-.img-fluid{
-    max-height: 197px !important;
+
+.img-fluid {
+    max-height: 197px;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
-.video-testimonial-block{
-    max-width: 350px !important;
-    max-height: 197px !important;
+
+.video-testimonial-block {
+    max-width: 350px;
+    max-height: 197px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
 }
-.pfp{
-    max-width: 100px;
-    border-radius: 100px;
+
+.video-testimonial-block:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.video-testimonial-content {
+    padding: 10px;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+    border-color: #117a8b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+    border-color: #a71d2a;
+}
+
+.infinite-more-link {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.infinite-more-link:hover {
+    color: #0056b3;
 }

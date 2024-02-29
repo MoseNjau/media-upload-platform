@@ -1,6 +1,5 @@
-# .gitignore for Django Projects
-requirements.txt
-
+.env
+env
 # Ignore virtual environment
 env/
 
