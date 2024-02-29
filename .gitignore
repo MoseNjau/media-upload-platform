@@ -1,4 +1,4 @@
-.env
+.env/
 env
 # Ignore virtual environment
 env/
