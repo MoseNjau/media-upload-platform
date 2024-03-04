@@ -1,0 +1,30 @@
+/* Header Styles */
+nav.navbar {
+    padding: 10px 0; /* Adjust padding as needed */
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-right: 15px; /* Adjust margin as needed */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333; /* Adjust link color as needed */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Adjust link hover color as needed */
+}
+
+.brand {
+    /* Add styles for your brand/logo container */
+}
+
+/* Add any additional styles for header content */

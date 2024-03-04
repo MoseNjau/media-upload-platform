@@ -1,0 +1,32 @@
+/* Footer Styles */
+footer.bg-light {
+    padding: 20px 0; /* Adjust padding as needed */
+}
+
+.container {
+    max-width: 1200px; /* Adjust max-width as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+.text-muted {
+    color: #888; /* Adjust color as needed */
+}
+
+.list-inline {
+    padding: 0;
+    list-style: none;
+}
+
+.list-inline-item {
+    display: inline-block;
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+.list-inline-item a {
+    text-decoration: none;
+    color: #333; /* Adjust link color as needed */
+}
+
+.list-inline-item a:hover {
+    color: #007bff; /* Adjust link hover color as needed */
+}
