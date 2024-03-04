@@ -1,3 +1,60 @@
 *{
     text-decoration: none !important;
 }
+
+
+/* Navbar styles */
+.navbar {
+    padding: 15px 0;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+}
+
+.navbar-brand h2 {
+    margin: 0;
+}
+
+.navbar-text {
+    margin-left: auto;
+}
+
+/* Video container styles */
+.container-md {
+    margin-top: 20px;
+}
+
+/* Video styles */
+video {
+    width: 100%;
+    height: auto;
+}
+
+/* Form styles */
+.form-inline {
+    margin-right: 15px;
+}
+
+.form-control {
+    margin-right: 5px;
+}
+
+.form-signup {
+    margin-top: 15px;
+}
+
+/* Comment styles */
+.container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.container p {
+    margin-bottom: 5px;
+}
+
+.container small {
+    color: #888;
+}
